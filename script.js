@@ -9,6 +9,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     initHeaderScroll();
     initMobileMenu();
+    initLogoAnimation();
     initSmoothScroll();
     initScrollAnimations();
     initCounterAnimations();
@@ -78,6 +79,28 @@ function initMobileMenu() {
             nav.classList.remove('active');
             document.body.classList.remove('no-scroll');
         }
+    });
+}
+
+// ==========================================
+// LOGO TAP ANIMATION
+// The logo no longer navigates anywhere - it's purely a
+// decorative "find your eclipse moment" moment. Clicking or
+// tapping it plays the same eclipse animation that used to be
+// hover-only, so it works reliably on touch devices.
+// ==========================================
+function initLogoAnimation() {
+    const logos = document.querySelectorAll('.logo');
+    if (!logos.length) return;
+
+    logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+            if (logo.classList.contains('is-animating')) return;
+            logo.classList.add('is-animating');
+            setTimeout(() => {
+                logo.classList.remove('is-animating');
+            }, 2800);
+        });
     });
 }
 
