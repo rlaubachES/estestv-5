@@ -163,7 +163,6 @@ body {
     transition: none;
 }
 
-.logo:hover .logo-icon svg circle:first-child,
 .logo.is-animating .logo-icon svg circle:first-child {
     animation: eclipseOutline 2.5s ease-in-out forwards;
 }
@@ -175,7 +174,6 @@ body {
     transform: translateX(0);
 }
 
-.logo:hover .logo-icon svg circle:last-child,
 .logo.is-animating .logo-icon svg circle:last-child {
     animation: eclipseFilled 2.5s ease-in-out forwards;
     transition: none;
@@ -196,7 +194,6 @@ body {
     border-radius: 50%;
 }
 
-.logo:hover .logo-icon::after,
 .logo.is-animating .logo-icon::after {
     animation: eclipseShimmer 2.75s ease-in-out forwards;
 }
