@@ -170,8 +170,9 @@ body {
 
 /* Animate the filled circle (moves right) */
 .logo-icon svg circle:last-child {
-    transition: cx 0.8s ease-out;
+    transition: transform 0.8s ease-out;
     cx: 62;
+    transform: translateX(0);
 }
 
 .logo:hover .logo-icon svg circle:last-child,
@@ -217,16 +218,16 @@ body {
 
 @keyframes eclipseFilled {
     0% {
-        cx: 20;
+        transform: translateX(-42px);
     }
     45% {
-        cx: 50;
+        transform: translateX(-12px);
     }
     55% {
-        cx: 50;
+        transform: translateX(-12px);
     }
     100% {
-        cx: 62;
+        transform: translateX(0);
     }
 }
 
