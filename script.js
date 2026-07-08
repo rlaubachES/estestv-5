@@ -97,9 +97,24 @@ function initLogoAnimation() {
         logo.addEventListener('click', () => {
             if (logo.classList.contains('is-animating')) return;
             logo.classList.add('is-animating');
-            setTimeout(() => {
+        });
+
+        // Re-enable exactly when the longest animation (the shimmer)
+        // actually finishes, instead of guessing a timeout duration.
+        logo.addEventListener('animationend', (e) => {
+            if (e.animationName === 'eclipseShimmer') {
                 logo.classList.remove('is-animating');
-            }, 2800);
+            }
+        });
+
+        // Safety net: if animationend never fires for some reason
+        // (e.g. the tab was backgrounded mid-animation), don't leave
+        // the logo permanently stuck as unclickable.
+        logo.addEventListener('click', () => {
+            clearTimeout(logo._logoSafety);
+            logo._logoSafety = setTimeout(() => {
+                logo.classList.remove('is-animating');
+            }, 3200);
         });
     });
 }
