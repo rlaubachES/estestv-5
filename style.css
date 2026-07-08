@@ -131,6 +131,16 @@ body {
     gap: 12px;
     text-decoration: none;
     transition: opacity var(--transition-fast);
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    text-align: left;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .logo-icon {
@@ -153,7 +163,8 @@ body {
     transition: none;
 }
 
-.logo:hover .logo-icon svg circle:first-child {
+.logo:hover .logo-icon svg circle:first-child,
+.logo.is-animating .logo-icon svg circle:first-child {
     animation: eclipseOutline 2.5s ease-in-out forwards;
 }
 
@@ -163,7 +174,8 @@ body {
     cx: 62;
 }
 
-.logo:hover .logo-icon svg circle:last-child {
+.logo:hover .logo-icon svg circle:last-child,
+.logo.is-animating .logo-icon svg circle:last-child {
     animation: eclipseFilled 2.5s ease-in-out forwards;
     transition: none;
 }
@@ -183,7 +195,8 @@ body {
     border-radius: 50%;
 }
 
-.logo:hover .logo-icon::after {
+.logo:hover .logo-icon::after,
+.logo.is-animating .logo-icon::after {
     animation: eclipseShimmer 2.75s ease-in-out forwards;
 }
 
@@ -390,28 +403,6 @@ body {
     justify-content: center;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1.9s;
-}
-
-/* Scroll Indicator */
-.scroll-indicator {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 80px;
-    background: var(--color-border);
-}
-
-@keyframes scrollLine {
-    0%, 100% {
-        height: 0;
-        transform: translateY(0);
-    }
-    50% {
-        height: 40px;
-        transform: translateY(40px);
-    }
 }
 
 /* ==========================================
@@ -1190,7 +1181,7 @@ body {
     }
     
     .hero-tagline {
-        font-size: 13px;
+        font-size: 16px;
         margin-bottom: 48px;
     }
     
@@ -1268,7 +1259,6 @@ body {
     .header,
     .nav,
     .menu-toggle,
-    .scroll-indicator,
     .back-to-top {
         display: none;
     }
@@ -1369,7 +1359,7 @@ body {
     }
     
     .service-detail-description {
-        font-size: 14px;
+        font-size: 16px;
     }
     
     .feature-item {
@@ -1811,13 +1801,13 @@ body {
 
 @media (max-width: 768px) {
     .services.service-block {
-        padding: 56px 24px;
+        padding: 40px 24px;
     }
 }
 
 @media (max-width: 480px) {
     .services.service-block {
-        padding: 48px 20px;
+        padding: 36px 20px;
     }
 }
 
@@ -1955,5 +1945,147 @@ body {
 
     .hero-title {
         font-size: 32px;
+    }
+}
+
+
+/* ==========================================================
+   MOBILE REVAMP — ROUND 2 FIXES
+   Follow-up pass based on real-device screenshots: nav/logo
+   behavior, spacing between grid items, footer layout, and
+   typographic weight/legibility on small screens.
+   ========================================================== */
+
+/* ---- services.html final CTA ("Ready to Get Started?") ----
+   Previously had inline padding: 100px 0 which, like the other
+   inline-padding bugs fixed in round 1, silently overrode any
+   mobile media query since inline styles always win. ---- */
+.services-final-cta {
+    padding: 100px 0;
+}
+
+@media (max-width: 768px) {
+    .services-final-cta {
+        padding: 48px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-final-cta {
+        padding: 40px 0;
+    }
+}
+
+/* ---- Tighter grid spacing on mobile: "What We Do" / "Our
+   Values" (services-grid) and "Featured Partners" / "Our
+   Partners" (work-grid) had a generous 60px gap intended for
+   desktop-style breathing room; noticeably tighter reads better
+   once everything is a single stacked column on a phone. ---- */
+@media (max-width: 968px) {
+    .services-grid {
+        gap: 36px;
+    }
+
+    .work-grid {
+        gap: 32px;
+    }
+}
+
+/* ---- Footer: center content and compact vertical rhythm on
+   mobile. Desktop keeps its left-aligned multi-column layout;
+   this only applies once the footer stacks to one column. ---- */
+@media (max-width: 968px) {
+    .footer {
+        padding-top: 48px;
+    }
+
+    .footer-content {
+        margin-bottom: 40px;
+        gap: 40px;
+        justify-items: center;
+    }
+
+    .footer-brand {
+        justify-content: center;
+    }
+
+    .footer-links {
+        gap: 32px;
+        text-align: center;
+    }
+
+    .footer-column {
+        align-items: center;
+    }
+
+    .footer-column h4 {
+        margin-bottom: 14px;
+    }
+
+    .footer-column a {
+        margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+        margin-top: 40px;
+        padding: 20px 24px;
+    }
+}
+
+/* ---- about.html "Our Approach": Discovery / Strategy /
+   Execution / Optimization previously inherited the generic
+   .service-detail mobile spacing (60px margin + 40px padding),
+   meant for the more spacious services.html feature list. This
+   compound selector's higher specificity wins regardless of
+   source order, so it always overrides the generic rule. ---- */
+@media (max-width: 968px) {
+    .about-approach .service-detail {
+        margin-bottom: 8px;
+        padding: 20px 0 20px 20px;
+    }
+}
+
+/* ---- about.html "Who We Are": Ryan's row has text before image
+   in source order (so desktop shows text-left/image-right). On
+   mobile that stacks as text-above-image; reorder visually only,
+   so the photo leads, without touching desktop's DOM-order
+   layout. Also switch to object-fit:contain on mobile so the
+   whole photo always shows regardless of its actual aspect
+   ratio, instead of being cropped by a fixed-height cover box. ---- */
+@media (max-width: 768px) {
+    .who-we-are-row--right .who-we-are-image {
+        order: 1;
+    }
+
+    .who-we-are-row--right .who-we-are-text {
+        order: 2;
+    }
+
+    .who-we-are-image {
+        height: 440px;
+        background: var(--color-bg-alt);
+    }
+
+    .who-we-are-image img {
+        object-fit: contain;
+    }
+}
+
+/* ---- Headings ("Elevated Social Media Management", "What We
+   Do", "Our Services", etc.) use an ultra-thin (100) display
+   weight tuned for large desktop sizes. At mobile sizes that
+   same thinness reads as washed-out and low-contrast, so it's
+   bumped to a still-light-but-legible 300 here, with slightly
+   relaxed letter-spacing since tight negative tracking meant for
+   78px/56px text is proportionally much tighter at 48px/38px. ---- */
+@media (max-width: 768px) {
+    .hero-title {
+        font-weight: var(--font-weight-light);
+        letter-spacing: -1px;
+    }
+
+    .section-title {
+        font-weight: var(--font-weight-light);
+        letter-spacing: -0.5px;
     }
 }
