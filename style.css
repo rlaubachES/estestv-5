@@ -31,8 +31,9 @@
     --container-padding: 60px;
     
     /* Typography */
-    --font-primary: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
-    --font-weight-thin: 100;
+    --font-primary: 'Work Sans', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+    --font-accent: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+    --font-weight-display: 400;
     --font-weight-light: 300;
     --font-weight-regular: 400;
     
@@ -131,16 +132,6 @@ body {
     gap: 12px;
     text-decoration: none;
     transition: opacity var(--transition-fast);
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font: inherit;
-    cursor: pointer;
-    text-align: left;
-    -webkit-appearance: none;
-    appearance: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .logo-icon {
@@ -163,18 +154,17 @@ body {
     transition: none;
 }
 
-.logo.is-animating .logo-icon svg circle:first-child {
+.logo:hover .logo-icon svg circle:first-child {
     animation: eclipseOutline 2.5s ease-in-out forwards;
 }
 
 /* Animate the filled circle (moves right) */
 .logo-icon svg circle:last-child {
-    transition: transform 0.8s ease-out;
+    transition: cx 0.8s ease-out;
     cx: 62;
-    transform: translateX(0);
 }
 
-.logo.is-animating .logo-icon svg circle:last-child {
+.logo:hover .logo-icon svg circle:last-child {
     animation: eclipseFilled 2.5s ease-in-out forwards;
     transition: none;
 }
@@ -194,7 +184,7 @@ body {
     border-radius: 50%;
 }
 
-.logo.is-animating .logo-icon::after {
+.logo:hover .logo-icon::after {
     animation: eclipseShimmer 2.75s ease-in-out forwards;
 }
 
@@ -215,16 +205,16 @@ body {
 
 @keyframes eclipseFilled {
     0% {
-        transform: translateX(-42px);
+        cx: 20;
     }
     45% {
-        transform: translateX(-12px);
+        cx: 50;
     }
     55% {
-        transform: translateX(-12px);
+        cx: 50;
     }
     100% {
-        transform: translateX(0);
+        cx: 62;
     }
 }
 
@@ -241,18 +231,20 @@ body {
 }
 
 .logo-text h1 {
-    font-size: 20px;
-    font-weight: var(--font-weight-light);
+    font-size: 24px;
+    font-weight: var(--font-weight-heavy);
     letter-spacing: 3.0px;
     color: var(--color-text);
     margin: 0;
 }
 
 .logo-text p {
-    font-size: 10px;
+    font-family: var(--font-accent);
+    font-size: 11px;
     color: var(--color-secondary);
-    letter-spacing: 3px;
-    font-weight: bold;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-style: normal;
     margin-left: 1px;
 }
 
@@ -267,8 +259,8 @@ body {
 .nav-link {
     color: var(--color-primary);
     text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: var(--font-weight-heavy);
+    font-size: 15px;
     letter-spacing: 2px;
     position: relative;
     transition: color var(--transition-fast);
@@ -346,7 +338,7 @@ body {
     margin-top: -40px;
     margin-bottom: 48px;
     color: var(--color-text);
-    font-weight: var(--font-weight-thin);
+    font-weight: var(--font-weight-display);
     letter-spacing: -2.5px;
     line-height: 1.05;
     opacity: 0;
@@ -359,13 +351,14 @@ body {
 }
 
 .hero-tagline {
-    font-size: 16px;
+    font-family: var(--font-accent);
+    font-size: 30px;
     color: var(--color-primary);
     font-style: normal;
     margin-bottom: 48px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: none;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1.5s;
     position: relative;
@@ -385,7 +378,7 @@ body {
 }
 
 .hero-description {
-    font-size: 16px;
+    font-size: 20px;
     color: var(--color-text-light);
     max-width: 510px;
     margin: 0 auto 78px;
@@ -401,6 +394,28 @@ body {
     justify-content: center;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1.9s;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 80px;
+    background: var(--color-border);
+}
+
+@keyframes scrollLine {
+    0%, 100% {
+        height: 0;
+        transform: translateY(0);
+    }
+    50% {
+        height: 40px;
+        transform: translateY(40px);
+    }
 }
 
 /* ==========================================
@@ -493,10 +508,10 @@ body {
 }
 
 .section-title {
-    font-size: 56px;
+    font-size: 60px;
     color: var(--color-text);
     margin-bottom: 25px;
-    font-weight: var(--font-weight-thin);
+    font-weight: var(--font-weight-display);
     letter-spacing: -1.8px;
     line-height: 1.17;
 }
@@ -638,8 +653,8 @@ body {
 
 .stats-subtitle {
     text-align: center;
-    font-size: 18px;
-    max-width: 700px;
+    font-size: 20px;
+    max-width: 7500px;
     margin: 0 auto 40px;
     font-weight: var(--font-weight-heavy);
     line-height: 2;
@@ -653,7 +668,7 @@ body {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: min(640px, 82vw);
+    width: min(770px, 82vw);
     height: 2px;
     background: var(--color-secondary);
     margin-bottom: -5px;
@@ -846,11 +861,13 @@ body {
 }
 
 .contact-intro {
+    font-family: var(--font-accent);
     text-align: center;
-    font-size: 16px;
+    font-size: 22px;
+    font-style: normal;
     margin-bottom: 60px;
-    font-weight: var(--font-weight-heavy);
-    line-height: 2;
+    font-weight: 500;
+    line-height: 1.7;
     position: relative;
     padding: 12px;
 }
@@ -861,7 +878,7 @@ body {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: min(335px, 78vw);
+    width: min(500px, 78vw);
     height: 2px;
     background: var(--color-secondary);
     margin-bottom: -5px;
@@ -1014,7 +1031,7 @@ body {
 }
 
 .footer-bottom p {
-    font-size: 10px;
+    font-size: 12px;
     color: var(--color-text-lighter);
     letter-spacing: 2px;
     font-weight: var(--font-weight-light);
@@ -1179,7 +1196,7 @@ body {
     }
     
     .hero-tagline {
-        font-size: 16px;
+        font-size: 13px;
         margin-bottom: 48px;
     }
     
@@ -1257,6 +1274,7 @@ body {
     .header,
     .nav,
     .menu-toggle,
+    .scroll-indicator,
     .back-to-top {
         display: none;
     }
@@ -1357,7 +1375,7 @@ body {
     }
     
     .service-detail-description {
-        font-size: 16px;
+        font-size: 14px;
     }
     
     .feature-item {
@@ -1799,13 +1817,13 @@ body {
 
 @media (max-width: 768px) {
     .services.service-block {
-        padding: 40px 24px;
+        padding: 56px 24px;
     }
 }
 
 @media (max-width: 480px) {
     .services.service-block {
-        padding: 36px 20px;
+        padding: 48px 20px;
     }
 }
 
@@ -1943,147 +1961,5 @@ body {
 
     .hero-title {
         font-size: 32px;
-    }
-}
-
-
-/* ==========================================================
-   MOBILE REVAMP — ROUND 2 FIXES
-   Follow-up pass based on real-device screenshots: nav/logo
-   behavior, spacing between grid items, footer layout, and
-   typographic weight/legibility on small screens.
-   ========================================================== */
-
-/* ---- services.html final CTA ("Ready to Get Started?") ----
-   Previously had inline padding: 100px 0 which, like the other
-   inline-padding bugs fixed in round 1, silently overrode any
-   mobile media query since inline styles always win. ---- */
-.services-final-cta {
-    padding: 100px 0;
-}
-
-@media (max-width: 768px) {
-    .services-final-cta {
-        padding: 48px 0;
-    }
-}
-
-@media (max-width: 480px) {
-    .services-final-cta {
-        padding: 40px 0;
-    }
-}
-
-/* ---- Tighter grid spacing on mobile: "What We Do" / "Our
-   Values" (services-grid) and "Featured Partners" / "Our
-   Partners" (work-grid) had a generous 60px gap intended for
-   desktop-style breathing room; noticeably tighter reads better
-   once everything is a single stacked column on a phone. ---- */
-@media (max-width: 968px) {
-    .services-grid {
-        gap: 36px;
-    }
-
-    .work-grid {
-        gap: 32px;
-    }
-}
-
-/* ---- Footer: center content and compact vertical rhythm on
-   mobile. Desktop keeps its left-aligned multi-column layout;
-   this only applies once the footer stacks to one column. ---- */
-@media (max-width: 968px) {
-    .footer {
-        padding-top: 48px;
-    }
-
-    .footer-content {
-        margin-bottom: 40px;
-        gap: 40px;
-        justify-items: center;
-    }
-
-    .footer-brand {
-        justify-content: center;
-    }
-
-    .footer-links {
-        gap: 32px;
-        text-align: center;
-    }
-
-    .footer-column {
-        align-items: center;
-    }
-
-    .footer-column h4 {
-        margin-bottom: 14px;
-    }
-
-    .footer-column a {
-        margin-bottom: 10px;
-    }
-
-    .footer-bottom {
-        margin-top: 40px;
-        padding: 20px 24px;
-    }
-}
-
-/* ---- about.html "Our Approach": Discovery / Strategy /
-   Execution / Optimization previously inherited the generic
-   .service-detail mobile spacing (60px margin + 40px padding),
-   meant for the more spacious services.html feature list. This
-   compound selector's higher specificity wins regardless of
-   source order, so it always overrides the generic rule. ---- */
-@media (max-width: 968px) {
-    .about-approach .service-detail {
-        margin-bottom: 8px;
-        padding: 20px 0 20px 20px;
-    }
-}
-
-/* ---- about.html "Who We Are": Ryan's row has text before image
-   in source order (so desktop shows text-left/image-right). On
-   mobile that stacks as text-above-image; reorder visually only,
-   so the photo leads, without touching desktop's DOM-order
-   layout. Also switch to object-fit:contain on mobile so the
-   whole photo always shows regardless of its actual aspect
-   ratio, instead of being cropped by a fixed-height cover box. ---- */
-@media (max-width: 768px) {
-    .who-we-are-row--right .who-we-are-image {
-        order: 1;
-    }
-
-    .who-we-are-row--right .who-we-are-text {
-        order: 2;
-    }
-
-    .who-we-are-image {
-        height: 440px;
-        background: var(--color-bg-alt);
-    }
-
-    .who-we-are-image img {
-        object-fit: contain;
-    }
-}
-
-/* ---- Headings ("Elevated Social Media Management", "What We
-   Do", "Our Services", etc.) use an ultra-thin (100) display
-   weight tuned for large desktop sizes. At mobile sizes that
-   same thinness reads as washed-out and low-contrast, so it's
-   bumped to a still-light-but-legible 300 here, with slightly
-   relaxed letter-spacing since tight negative tracking meant for
-   78px/56px text is proportionally much tighter at 48px/38px. ---- */
-@media (max-width: 768px) {
-    .hero-title {
-        font-weight: var(--font-weight-light);
-        letter-spacing: -1px;
-    }
-
-    .section-title {
-        font-weight: var(--font-weight-light);
-        letter-spacing: -0.5px;
     }
 }
