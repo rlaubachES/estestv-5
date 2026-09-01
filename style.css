@@ -21,6 +21,8 @@
     --color-text-lighter: #222222;
     --color-primary: #8E7FA9;
     --color-secondary: #B39F7C;
+    --color-primary-text: #726191;   /* darker lavender for small/body-sized text — 4.6:1+ on all site backgrounds, vs. 3.1–3.65:1 for --color-primary */
+    --color-secondary-text: #7A6847; /* darker gold for small/body-sized text — 4.6:1+ on all site backgrounds, vs. 2.2–2.4:1 for --color-secondary */
     --color-white: #FFFFFF;
     --color-border: #EEEEE8;
     
@@ -33,9 +35,12 @@
     /* Typography */
     --font-primary: 'Work Sans', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
     --font-accent: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
-    --font-weight-display: 400;
     --font-weight-light: 300;
     --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-display: 400; /* large headline/numeral treatment (hero-title, section-title, stat-value, pricing-price) */
     
     /* Spacing */
     --spacing-xs: 10px;
@@ -231,8 +236,8 @@ body {
 }
 
 .logo-text h1 {
-    font-size: 24px;
-    font-weight: var(--font-weight-heavy);
+    font-size: 22px;
+    font-weight: var(--font-weight-light);
     letter-spacing: 3.0px;
     color: var(--color-text);
     margin: 0;
@@ -257,9 +262,9 @@ body {
 }
 
 .nav-link {
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     text-decoration: none;
-    font-weight: var(--font-weight-heavy);
+    font-weight: bold;
     font-size: 15px;
     letter-spacing: 2px;
     position: relative;
@@ -278,7 +283,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-text);
 }
 
 .nav-link:hover::after {
@@ -334,7 +339,7 @@ body {
 }
 
 .hero-title {
-    font-size: 78px;
+    font-size: 86px;
     margin-top: -40px;
     margin-bottom: 48px;
     color: var(--color-text);
@@ -352,9 +357,9 @@ body {
 
 .hero-tagline {
     font-family: var(--font-accent);
-    font-size: 30px;
+    font-size: 19px;
     color: var(--color-primary);
-    font-style: normal;
+    font-style: italic;
     margin-bottom: 48px;
     font-weight: 500;
     letter-spacing: 1px;
@@ -378,12 +383,12 @@ body {
 }
 
 .hero-description {
-    font-size: 20px;
+    font-size: 18px;
     color: var(--color-text-light);
     max-width: 510px;
     margin: 0 auto 78px;
     font-weight: var(--font-weight-medium);
-    line-height: 2.15;
+    line-height: 1.65;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1.7s;
 }
@@ -425,7 +430,7 @@ body {
     padding: 21px 68px;
     border: none;
     border-radius: 0;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     transition: all var(--transition-medium);
@@ -508,7 +513,7 @@ body {
 }
 
 .section-title {
-    font-size: 60px;
+    font-size: 62px;
     color: var(--color-text);
     margin-bottom: 25px;
     font-weight: var(--font-weight-display);
@@ -521,7 +526,7 @@ body {
 }
 
 .feature-text p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-text-light);
     line-height: 2.15;
     font-weight: var(--font-weight-light);
@@ -568,16 +573,16 @@ body {
 }
 
 .stat-number {
-    font-size: 48px;
+    font-size: 53px;
     color: var(--color-secondary);
     margin-bottom: 12px;
-    font-weight: var(--font-weight-thin);
+    font-weight: var(--font-weight-display);
     line-height: 1;
 }
 
 .stat-label {
     color: var(--color-text-lighter);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: var(--font-weight-regular);
@@ -612,18 +617,18 @@ body {
 }
 
 .service-title {
-    font-size: 21px;
-    color: var(--color-primary);
+    font-size: 23px;
+    color: var(--color-primary-text);
     letter-spacing: 1px;
     transition: color var(--transition-fast);
     margin-bottom: 4px;
 }
 
 .service-description {
-    line-height: 2.15;
+    line-height: 1.6;
     font-weight: var(--font-weight-medium);
-    font-size: 16px;
-    text-align: left
+    font-size: 18px;
+    text-align: left;
 }
 
 .service-hover-line {
@@ -644,6 +649,34 @@ body {
     transform: translateY(-5px);
 }
 
+/* ---- Reusable centered section intro paragraph (title -> intro -> content)
+   Replaces one-off inline styles that couldn't be reached by the
+   stylesheet's readability fixes, e.g. the Services page pricing lead-in. ---- */
+.section-intro {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.65;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text);
+    max-width: 600px;
+    margin: 0 auto 80px;
+    position: relative;
+    padding-bottom: 24px;
+}
+
+/* ---- Reusable "Coming Soon" placeholder tile (portfolio.html) ----
+   Replaces 3 identical inline styles; also fixes the placeholder's
+   text contrast, which fell to 2.84:1 against the light gray fill. ---- */
+.work-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-primary-text);
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
 /* ==========================================
    STATS SECTION
    ========================================== */
@@ -654,10 +687,10 @@ body {
 .stats-subtitle {
     text-align: center;
     font-size: 20px;
-    max-width: 7500px;
+    max-width: 700px;
     margin: 0 auto 40px;
-    font-weight: var(--font-weight-heavy);
-    line-height: 2;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.6;
     position: relative;
     padding: 12px;
 }
@@ -668,7 +701,7 @@ body {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: min(770px, 82vw);
+    width: min(640px, 82vw);
     height: 2px;
     background: var(--color-secondary);
     margin-bottom: -5px;
@@ -702,10 +735,10 @@ body {
 }
 
 .stat-value {
-    font-size: 70px;
+    font-size: 77px;
     color: var(--color-primary);
     margin-bottom: 0;
-    font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-display);
 }
 
 .stat-arrow {
@@ -737,12 +770,11 @@ body {
 }
 
 .stat-text {
-    color: var(--color-secondary);
-    font-size: 16px;
+    color: var(--color-secondary-text);
+    font-size: 18px;
     font-weight: bold;
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-weight: bold;
 }
 
 /* ==========================================
@@ -835,14 +867,14 @@ body {
 }
 
 .work-title {
-    font-size: 18px;
-    color: var(--color-primary);
+    font-size: 20px;
+    color: var(--color-primary-text);
     margin-top: 8px;
     letter-spacing: 0.5px;
 }
 
 .work-category {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-text-lighter);
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -863,8 +895,8 @@ body {
 .contact-intro {
     font-family: var(--font-accent);
     text-align: center;
-    font-size: 22px;
-    font-style: normal;
+    font-size: 20px;
+    font-style: italic;
     margin-bottom: 60px;
     font-weight: 500;
     line-height: 1.7;
@@ -878,7 +910,7 @@ body {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: min(500px, 78vw);
+    width: min(335px, 78vw);
     height: 2px;
     background: var(--color-secondary);
     margin-bottom: -5px;
@@ -919,9 +951,9 @@ body {
     border-bottom: 2px solid var(--color-secondary);
     background: transparent;
     font-family: var(--font-primary);
-    font-size: 14px;
+    font-size: 16px;
     color: var(--color-text);
-    font-weight: var(--font-weight-heavy);
+    font-weight: var(--font-weight-regular);
     letter-spacing: 0.5px;
     transition: border-color var(--transition-fast);
 }
@@ -936,11 +968,11 @@ body {
     position: absolute;
     top: 20px;
     left: 0;
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 2px;
     text-transform: uppercase;
     pointer-events: none;
-    font-weight: var(--font-weight-heavy);
+    font-weight: var(--font-weight-medium);
     transition: all var(--transition-fast);
 }
 
@@ -949,7 +981,7 @@ body {
 .form-group textarea:focus + label,
 .form-group textarea:not(:placeholder-shown) + label {
     top: 0;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--color-primary);
     font-weight: bold;
 }
@@ -995,8 +1027,8 @@ body {
 }
 
 .footer-column h4 {
-    font-size: 14px;
-    color: var(--color-primary);
+    font-size: 15px;
+    color: var(--color-primary-text);
     letter-spacing: 2px;
     text-transform: uppercase;
     margin: 0;
@@ -1008,8 +1040,8 @@ body {
 
 .footer-column a {
     display: block;
-    font-size: 13px;
-    color: var(--color-text-heavy);
+    font-size: 14px;
+    color: var(--color-text);
     text-decoration: none;
     margin-bottom: 12px;
     font-weight: var(--font-weight-light);
@@ -1031,7 +1063,7 @@ body {
 }
 
 .footer-bottom p {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--color-text-lighter);
     letter-spacing: 2px;
     font-weight: var(--font-weight-light);
@@ -1103,11 +1135,11 @@ body {
     }
     
     .hero-title {
-        font-size: 64px;
+        font-size: 70px;
     }
     
     .section-title {
-        font-size: 48px;
+        font-size: 53px;
     }
     
     .services,
@@ -1191,17 +1223,17 @@ body {
     }
     
     .hero-title {
-        font-size: 48px;
+        font-size: 53px;
         margin-bottom: 32px;
     }
     
     .hero-tagline {
-        font-size: 13px;
+        font-size: 14px;
         margin-bottom: 48px;
     }
     
     .hero-description {
-        font-size: 13px;
+        font-size: 17px;
         margin-bottom: 60px;
     }
     
@@ -1211,7 +1243,7 @@ body {
     }
     
     .section-title {
-        font-size: 38px;
+        font-size: 42px;
     }
     
     .services,
@@ -1241,18 +1273,18 @@ body {
 
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 36px;
+        font-size: 40px;
         letter-spacing: -1px;
     }
     
     .section-title {
-        font-size: 32px;
+        font-size: 35px;
         letter-spacing: -1px;
     }
     
     .btn {
         padding: 18px 48px;
-        font-size: 10px;
+        font-size: 12px;
     }
 }
 
@@ -1292,7 +1324,7 @@ body {
 }
 
 .service-detail-number {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-secondary);
     letter-spacing: 3px;
     font-weight: bold;
@@ -1300,21 +1332,21 @@ body {
 }
 
 .service-detail-title {
-    font-size: 42px;
+    font-size: 46px;
     color: var(--color-primary);
     font-weight: var(--font-weight-bold);
     letter-spacing: -1px;
     margin-bottom: 24px;
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
 .service-detail-description {
-    font-size: 18px;
-    line-height: 2.15;
-    color: var(--color-text-heavy);
-    font-weight: var(--font-weight-heavy);
+    font-size: 20px;
+    line-height: 1.65;
+    color: var(--color-text);
+    font-weight: var(--font-weight-regular);
     margin-bottom: 40px;
-    max-width: 900px;
+    max-width: 720px;
 }
 
 /* Service Features Grid */
@@ -1338,18 +1370,18 @@ body {
 }
 
 .feature-item h4 {
-    font-size: 18px;
-    color: var(--color-primary);
+    font-size: 20px;
+    color: var(--color-primary-text);
     margin-bottom: 12px;
-    font-weight: var(--font-weight-heavy);
+    font-weight: var(--font-weight-semibold);
     letter-spacing: 0.5px;
 }
 
 .feature-item p {
-    font-size: 16px;
-    line-height: 2;
-    color: var(--color-text-heavy);
-    font-weight: var(--font-weight-heavy);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-text);
+    font-weight: var(--font-weight-regular);
 }
 
 /* Responsive adjustments for new elements */
@@ -1365,17 +1397,17 @@ body {
     }
     
     .service-detail-title {
-        font-size: 32px;
+        font-size: 35px;
     }
 }
 
 @media (max-width: 768px) {
     .service-detail-title {
-        font-size: 28px;
+        font-size: 31px;
     }
     
     .service-detail-description {
-        font-size: 14px;
+        font-size: 17px;
     }
     
     .feature-item {
@@ -1456,7 +1488,7 @@ body {
     right: -36px;
     width: 160px;
     text-align: center;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: bold;
@@ -1469,17 +1501,17 @@ body {
 }
 
 .pricing-tier {
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: bold;
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     margin-bottom: 16px;
 }
 
 .pricing-price {
-    font-size: 56px;
-    font-weight: var(--font-weight-thin);
+    font-size: 62px;
+    font-weight: var(--font-weight-display);
     color: var(--color-text);
     line-height: 1;
     margin-bottom: 20px;
@@ -1487,15 +1519,15 @@ body {
 }
 
 .pricing-price span {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: var(--font-weight-light);
     letter-spacing: 0;
 }
 
 .pricing-description {
-    font-size: 16px;
-    line-height: 2;
-    font-weight: var(--font-weight-heavy);
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: var(--font-weight-regular);
     color: var(--color-text);
     margin-bottom: 32px;
     padding-bottom: 32px;
@@ -1510,9 +1542,9 @@ body {
 }
 
 .pricing-features li {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
-    font-weight: var(--font-weight-heavy);
+    font-weight: var(--font-weight-medium);
     color: var(--color-text);
     padding: 12px 0 12px 20px;
     position: relative;
@@ -1541,7 +1573,7 @@ body {
     text-align: center;
     margin-top: auto;
     padding: 14px 40px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 @media (max-width: 968px) {
@@ -1587,16 +1619,16 @@ body {
 }
 
 .who-we-are-label {
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #8E7FA9;
+    color: var(--color-primary-text);
     margin-bottom: 12px;
     font-weight: bold;
 }
 
 .who-we-are-name {
-    font-size: 36px;
+    font-size: 40px;
     font-weight: 400;
     letter-spacing: 2px;
     color: #222222;
@@ -1612,18 +1644,18 @@ body {
 }
 
 .who-we-are-specialty {
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #B39F7C;
+    color: var(--color-secondary-text);
     margin-bottom: 24px;
     font-weight: bold;
 }
 
 .who-we-are-bio {
-    font-size: 16px;
-    line-height: 2;
-    font-weight: heavy;
+    font-size: 18px;
+    line-height: 1.7;
+    font-weight: var(--font-weight-regular);
     color: #444444;
     max-width: 480px;
 }
@@ -1711,7 +1743,7 @@ body {
 
 /* Our Approach Title Size - About Page Only */
 .about-approach .service-detail-title {
-    font-size: 32px;
+    font-size: 35px;
 }
 
 .who-we-are-text .who-we-are-divider,
@@ -1892,7 +1924,7 @@ body {
     }
 
     .who-we-are-name {
-        font-size: 28px;
+        font-size: 31px;
     }
 }
 
@@ -1902,7 +1934,7 @@ body {
 @media (max-width: 768px) {
     .form-group input,
     .form-group textarea {
-        font-size: 16px;
+        font-size: 18px;
     }
 }
 
@@ -1913,11 +1945,11 @@ body {
    screen than on a 1400px-wide desktop layout. ---- */
 @media (max-width: 768px) {
     .stat-value {
-        font-size: 52px;
+        font-size: 57px;
     }
 
     .pricing-price {
-        font-size: 44px;
+        font-size: 48px;
     }
 
     .pricing-card {
@@ -1925,17 +1957,17 @@ body {
     }
 
     .service-detail-title {
-        font-size: 30px;
+        font-size: 33px;
     }
 
     .work-title {
-        font-size: 17px;
+        font-size: 19px;
     }
 }
 
 @media (max-width: 480px) {
     .stat-value {
-        font-size: 42px;
+        font-size: 46px;
     }
 
     .stats-grid {
@@ -1943,11 +1975,11 @@ body {
     }
 
     .pricing-price {
-        font-size: 40px;
+        font-size: 44px;
     }
 
     .who-we-are-name {
-        font-size: 25px;
+        font-size: 28px;
     }
 }
 
@@ -1960,6 +1992,6 @@ body {
     }
 
     .hero-title {
-        font-size: 32px;
+        font-size: 35px;
     }
 }
